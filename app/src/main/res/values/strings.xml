@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">PBike</string>
+    <string name="label">Quickly Safely</string>
+    <string name="name">PBike</string>
+    <string name="logo">logo</string>
+    <string name="text_bottom">Kaminskyi</string>
+    <string name="login">Login</string>
+    <string name="sign_in">Sign in</string>
+    <string-array name="Bike_number">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="time_number">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    <string name="user_profile"><u>User profile</u></string>
+    <string name="user_rent"><u>Rent info</u></string>
+    <string name="rent_cost">Rent Cost:</string>
+    <string name="bike">Bike</string>
+    <string name="time">Time</string>
+    <string name="rent">Rent</string>
+</resources>

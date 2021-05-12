@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AEA4E3"
+    tools:context=".OrderActivity"
+    android:id="@+id/orderMap">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:weightSum="2">
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="22dp"
+            android:contentDescription="@string/logo"
+            app:srcCompat="@drawable/ic_logo" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="40dp"
+            app:srcCompat="@drawable/ic_quickly_safelyshort"
+            tools:ignore="ContentDescription" />
+
+         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:layout_gravity="center"
+                android:text="@string/rent_cost"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="55sp" />
+
+            <TextView
+                android:id="@+id/rentCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textSize="45sp"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_bike"
+                android:contentDescription="@string/bike" />
+
+            <Spinner
+                android:id="@+id/bike_number_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="150dp"
+                android:background="@drawable/ic_spinner_new"
+                android:entries="@array/Bike_number"
+                android:outlineAmbientShadowColor="@color/black"
+                android:popupBackground="@color/black"
+                android:scrollbarSize="10dp"
+
+                android:spinnerMode="dropdown"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_time"
+                android:contentDescription="@string/time" />
+            <Spinner
+                android:id="@+id/time_number_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="150dp"
+                android:scrollbarSize="10dp"
+                android:background="@drawable/ic_spinner_new"
+                android:entries="@array/time_number"
+                android:popupBackground="@color/black"
+                android:spinnerMode="dropdown"
+                 android:contextClickable="true"
+
+                android:textAlignment="center" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="70dp"  >
+
+            <Button
+                android:id="@+id/btn_rent"
+                android:textAllCaps="false"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_login"
+                android:fontFamily="@font/montserrat"
+                android:letterSpacing="0.1"
+                android:text="@string/rent"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+         </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>

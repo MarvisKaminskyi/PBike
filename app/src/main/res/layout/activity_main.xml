@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:id="@+id/root_element"
+    tools:context=".MainActivity"  >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_logo"
+            android:contentDescription="@string/logo"
+            android:layout_marginBottom="20dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_quickly_safely"
+
+            tools:ignore="ContentDescription" />
+
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/text_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/ic_kaminskyi"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/text_bottom"
+        android:layout_margin="15dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:id="@+id/btn_login"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_login"
+            android:fontFamily="@font/montserrat"
+            android:letterSpacing="0.1"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btn_sign_in"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_sing_in"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/sign_in"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="20dp"
+            android:letterSpacing="0.1" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "422493850683",
+    "project_id": "pbike-kaminskyi",
+    "storage_bucket": "pbike-kaminskyi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422493850683:android:dfbe978a4bd9dd86e8a01e",
+        "android_client_info": {
+          "package_name": "com.example.pbike"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422493850683-fr62vfg9v47bkfbgvnu0frdvv4a74k7q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pbike",
+            "certificate_hash": "bd877cd452c792601bf82d9f36e0b3fbb2bc668f"
+          }
+        },
+        {
+          "client_id": "422493850683-r08m4frun8tk4tpiusdtu4quv9plku7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoZ0XFGcD8gxoe-9Xio6xpTbhXm8NLYq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422493850683-r08m4frun8tk4tpiusdtu4quv9plku7k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
