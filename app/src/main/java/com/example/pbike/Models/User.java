@@ -1,13 +1,14 @@
 package com.example.pbike.Models;
 
 public class User {
-    private String name,email,pass,phone,park,timeOrder,bikeNumbers;
+    private String name, email, pass, phone, park;
+    int bikeNumbers,timeOrder,costRent;
 
     //public User() {
-        //this.name = name;
-       // this.email = email;
-        //this.pass = pass;
-        //this.phone = phone;
+    //this.name = name;
+    // this.email = email;
+    //this.pass = pass;
+    //this.phone = phone;
     //}
 
     public String getName() {
@@ -42,28 +43,38 @@ public class User {
         this.phone = phone;
     }
 
-    public  String getPark(){
+    public String getPark() {
         return park;
     }
 
     public void setPark(String park) {
-        this.park=park;
+        this.park = park;
     }
 
-    public String getTimeOrder() {
+    public int getTimeOrder() {
         return timeOrder;
     }
 
-    public void setTimeOrder(String timeOrder) {
+    public void setTimeOrder(int timeOrder) {
         this.timeOrder = timeOrder;
     }
 
-    public String getBikeNumbers(){
+    public int getBikeNumbers() {
         return bikeNumbers;
     }
 
-    public void setBikeNumbers(String bikeNumbers){
-        this.bikeNumbers=bikeNumbers;
+    public void setBikeNumbers(int bikeNumbers) {
+        this.bikeNumbers = bikeNumbers;
     }
+
+    public int getCostRent() {
+        return costRent;
+    }
+
+    public void setCostRent(int costRent) {
+        this.costRent = costRent;
+    }
+
+
 
 }

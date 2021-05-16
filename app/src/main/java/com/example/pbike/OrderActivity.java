@@ -21,33 +21,35 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class OrderActivity extends AppCompatActivity {
     Button btnRent;
-    Spinner time,bike;
-    TextView rent_cost,rent_time,rent_bike,rent_price;
+    Spinner time, bike;
+    TextView rent_cost, rent_time, rent_bike, rent_price,parkSelected;
     FirebaseAuth auth;
-    FirebaseFirestore db;
-    CollectionReference users;
+    FirestoreService firestoreService;
+    String selectedPark,selectedTime,selectedBike;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
         //CostShow
-        rent_cost=findViewById(R.id.rentCost);
+        rent_cost = findViewById(R.id.rentCost);
         //btn rent
-        btnRent=findViewById(R.id.btn_rent);
+        btnRent = findViewById(R.id.btn_rent);
         //rent info
-        rent_time=findViewById(R.id.user_rentTime_info);
-        rent_bike=findViewById(R.id.user_rentBike_info);
-        rent_price=findViewById(R.id.user_orderPrice_info);
 
-        auth= FirebaseAuth.getInstance();
-        db= FirebaseFirestore.getInstance();
-        users=db.collection("users");
+        auth = FirebaseAuth.getInstance();
+        firestoreService = new FirestoreService(auth.getUid());
+
 
         //spinner for bike
         bike = (Spinner) findViewById(R.id.bike_number_field);
@@ -65,23 +67,26 @@ public class OrderActivity extends AppCompatActivity {
         time.setAdapter(adapter_time);
 
         //handler time
-        time.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                costRentShow();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
+        //initListeners
+        initListeners();
 
-        });
+
+        selectedPark = getIntent().getStringExtra("Selected");
+
+    }
+
+
+
+    void initListeners() {
+        time.setOnItemSelectedListener(_timeSelected);
 
         //handler bike
         bike.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 costRentShow();
+                selectedBike = parentView.getSelectedItem().toString();
             }
 
             @Override
@@ -97,49 +102,79 @@ public class OrderActivity extends AppCompatActivity {
                 showRentWindowAccept();
             }
         });
-
-
-
-
     }
 
-    //handler rent price
-    public void costRentShow(){
+    AdapterView.OnItemSelectedListener _timeSelected = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            costRentShow();
+            selectedTime = parentView.getSelectedItem().toString();
+        }
 
-        float bikes_data= Float.parseFloat(bike.getSelectedItem().toString());
-        float times_data= Float.parseFloat(time.getSelectedItem().toString());
+        @Override
+        public void onNothingSelected(AdapterView<?> parentView) {
+        }
+
+    };
+
+    String costInfo;
+
+    //handler rent price
+    public void costRentShow() {
+
+        float bikes_data = Float.parseFloat(bike.getSelectedItem().toString());
+        float times_data = Float.parseFloat(time.getSelectedItem().toString());
 
         //fix. drop in dataBase!
-        float price=70;
+        float price = 70;
 
         float cost;
         cost = times_data * price * bikes_data;
-        String costInfo = String.valueOf(cost);
+        costInfo = String.valueOf(cost);
 
-       rent_cost.setText(costInfo+" UAH");
+        rent_cost.setText(costInfo + " UAH");
 
 
     }
-    public void showRentWindowAccept(){
 
-        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
-        LayoutInflater inflater=LayoutInflater.from(this);
-        View rent_accept=inflater.inflate(R.layout.rent_accept,null);
+    public void showRentWindowAccept() {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View rent_accept = inflater.inflate(R.layout.rent_accept, null);
         dialog.setView(rent_accept);
+
+        rent_time = rent_accept.findViewById(R.id.user_rentTime_info);
+        rent_bike = rent_accept.findViewById(R.id.user_rentBike_info);
+        rent_price = rent_accept.findViewById(R.id.user_orderPrice_info);
+        parkSelected=rent_accept.findViewById(R.id.user_park_info);
+
+        parkSelected.setText(selectedPark);
+        rent_bike.setText(selectedBike);
+        rent_time.setText(selectedTime);
+        rent_price.setText(costInfo);
         dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
                 dialogInterface.dismiss();
             }
         });
-         dialog.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
 
-             @Override
-             public void onClick(DialogInterface dialog, int which) {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Map<String, Object> data = new HashMap<>();
+                data.put("bikeNumbers", bike.getSelectedItem().toString());
+                data.put("timeOrder", time.getSelectedItem().toString()+"h");
+                data.put("costRent", Double.parseDouble(costInfo)+" UAH");
+                data.put("park",selectedPark);
 
-             }
+                firestoreService.updateUser(data);
+                startActivity(new Intent(OrderActivity.this, MapActivity.class));
+                finish();
+            }
 
-         });
+        });
         dialog.show();
 
     }

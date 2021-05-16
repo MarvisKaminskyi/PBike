@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -28,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnLogin,btnSignIn;
     FirebaseAuth auth;
-    FirebaseFirestore db;
-    CollectionReference users;
+    FirestoreService firestoreService;
 
     RelativeLayout root;
 
@@ -38,15 +38,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        auth = FirebaseAuth.getInstance();
+        firestoreService = new FirestoreService(auth.getUid());
+
+        auth.addAuthStateListener(firebaseAuth -> {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if(user!=null){
+                startActivity(new Intent(MainActivity.this, MapActivity.class));
+                finish();
+
+            }
+        });
 
         btnLogin=findViewById(R.id.btn_login);
         btnSignIn=findViewById(R.id.btn_sign_in);
 
         root=findViewById(R.id.root_element);
 
-        auth=FirebaseAuth.getInstance();
-        db=FirebaseFirestore.getInstance();
-        users=db.collection("users");
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,23 +165,15 @@ public class MainActivity extends AppCompatActivity {
                                 user.setPass(password.getText().toString());
                                 user.setName(name.getText().toString());
                                 user.setPhone(phone.getText().toString());
+                                user.setBikeNumbers(0);
+                                user.setTimeOrder(0);
+                                user.setPark("");
+                                user.setCostRent(0);
 
-                                users.document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .set(user)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                Snackbar.make(root,"User add!",Snackbar.LENGTH_LONG).show();
-                                                startActivity(new Intent(MainActivity.this, MapActivity.class));
-                                                finish();
-                                            }
-                                        }) .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Snackbar.make(root,"User not add",Snackbar.LENGTH_LONG).show();
-                                        Log.e("Error!", e.toString());
-                                    }
-                                });
+                                firestoreService.addUser(user,root);
+                                startActivity(new Intent(MainActivity.this, MapActivity.class));
+                                finish();
+
                             }
                         });
             }

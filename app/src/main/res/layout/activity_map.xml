@@ -33,6 +33,21 @@
             android:layout_marginTop="40dp"
             app:srcCompat="@drawable/ic_quickly_safelyshort"
             tools:ignore="ContentDescription" />
+
+        <Button
+            android:id="@+id/btn_log_out"
+            android:textAllCaps="false"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="120dp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_login"
+            android:fontFamily="@font/montserrat"
+            android:letterSpacing="0.1"
+            android:text="Log out"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            />
     </LinearLayout>
 
     <ScrollView
